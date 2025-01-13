@@ -1,0 +1,19 @@
+<h1>Productss how_details</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Nummer</th>
+    <th>Preis</th>
+  </tr>
+  <tr>
+    <td><%= @product.id %></td>
+    <td><%= @product.name %></td>
+    <td><%= @product.product_number %></td>
+    <td><%= @product.price %></td>
+  </tr>
+</table>
+<div>
+  <%= link_to 'Alle Produkte anzeigen', products_show_path%>
+</div>

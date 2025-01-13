@@ -1,0 +1,29 @@
+<h1>Products show</h1>
+
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Preis</th>
+      <th>Aktionen</th>
+    </tr>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td>
+          <%= link_to 'Details', products_show_details_path( :id => product.id) %>
+          <%= link_to 'Löschen', products_delete_path(:id => product.id)%>
+          <!-- <%= link_to 'Modify', products_modify_path(:id => product.id)%> -->
+        </td>
+      </tr>
+    <% end %>
+   
+</table>
+  
+<div>
+    <%= link_to 'Add', products_add_path%>
+</div>
+
+    

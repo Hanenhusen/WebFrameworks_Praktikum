@@ -1,0 +1,23 @@
+<h1>Neues Produkt hinzufügen</h1>
+
+<%= form_with model:@product, local: true do |form| %>
+  <div>
+    <%= form.label :name, "Name" %>
+      <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :product_number, "Produktnummer" %>
+      <%= form.text_field :product_number %>
+  </div>
+
+  <div>
+    <%= form.label :price, "Preis" %>
+      <%= form.text_field :price %>
+  </div>
+
+  <div>
+    <%= form.submit "Produkt hinzufügen" %>
+  </div>
+  <% end %>
+
