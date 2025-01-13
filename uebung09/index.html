@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produktverwaltung</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app" class="container"> <!--Bindet das HTML-Element an die Vue-Instanz-->
+        <h1>Produktverwaltung</h1>
+        <!-- Suchfeld -->
+        <label for="search">Suche:</label> <!--v-model: Bindet Eingabefelder direkt an Daten.-->
+        <input type="text" id="search" v-model="search" placeholder="Suche nach Name, Artikelnummer oder Preis...">
+
+        <!-- Produktliste -->
+        <ul><!-- v-for: Vue-Direktive, die durch die filteredProducts-Liste iteriert -->
+            <li v-for="product in filteredProducts" :key="product.id">
+                <img :src="product.image" alt="Produktbild">
+                <div>
+                    {{ product.name }} - {{ product.artikelnummer }} - {{ product.price }}€
+                </div>
+                <div>
+                    <!--Methode edirt/delete beim click aufrufen-->
+                    <button @click="editProduct(product)">Modifizieren</button>
+                    <button class="delete" @click="deleteProduct(product)">Löschen</button>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Eingabemaske für neues Produkt -->
+        <h2>Neues Produkt hinzufügen</h2>
+        <form @submit.prevent="addProduct"> <!--Verhindert den Standard-Formular-Submit und ruft stattdessen die addProduct-Methode in Vue auf.-->
+            <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+            <input type="text" v-model="newProduct.name" placeholder="Name"> 
+            <input type="text" v-model="newProduct.artikelnummer" placeholder="Artikelnummer">
+            <input type="text" v-model="newProduct.image" placeholder="Bild-URL">
+            <input type="number" v-model="newProduct.price" placeholder="Preis">
+            <button type="submit">Produkt hinzufügen</button>
+        </form>
+
+        <!-- Eingabemaske für Modifikation -->
+        <div v-if="showEditForm" class="edit-form">
+            <h2>Produkt modifizieren</h2>
+            <form @submit.prevent="updateProduct">
+                <p v-if="editErrorMessage" class="error">{{ editErrorMessage }}</p>
+                <input type="text" v-model="editProductData.name" placeholder="Name">
+                <input type="text" v-model="editProductData.artikelnummer" placeholder="Artikelnummer">
+                <input type="text" v-model="editProductData.image" placeholder="Bild-URL">
+                <input type="number" v-model="editProductData.price" placeholder="Preis">
+                <button type="submit">Änderungen speichern</button>
+                <button type="button" @click="cancelEdit">Abbrechen</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

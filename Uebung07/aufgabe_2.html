@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Währungsumrechner</title>
+  <style>
+    /* Allgemeines Styling für das Widget */
+    .waehrungsumrechner {
+    border: 2px solid #162433; /* Blaue Umrandung */
+    border-radius: 10px; /* Abgerundete Ecken */
+    max-width: 400px;
+    margin: 30px auto; /* Zentrieren */
+    padding: 20px;
+    background-color: #f8f9fa; /* Helles Hintergrundgrau */
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Schatteneffekt */
+    }
+
+    /* Überschrift */
+    .waehrungsumrechner h3 {
+    text-align: center;
+    color: #3e5369;
+    margin-bottom: 20px;
+    }
+
+    /* Formularfelder */
+    .waehrungsumrechner label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    }
+
+    .waehrungsumrechner input,
+    .waehrungsumrechner select {
+    width: 100%; /* Volle Breite */
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+    }
+
+    /* Umrechnen-Button */
+    .waehrungsumrechner button {
+    width: 100%; /* Volle Breite */
+    padding: 10px;
+    background-color: #214974; /* Blau */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+
+    .waehrungsumrechner button:hover {
+    background-color: #0056b3; /* Dunkleres Blau beim Hover */
+    }
+
+    /* Ergebnisfeld */
+    .ergebnis {
+    display: none; /* Standardmäßig verstecken */
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #e9ecef; /* Heller Grauton */
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+    }
+
+
+  </style>
+</head>
+<body>
+    <div id="umrechner" class="waehrungsumrechner"></div>
+  
+    <script src="waehrungsumrechner.js"></script>
+    <script>
+      // Wechselkurse definieren
+      const wechselkurse = {
+        EUR: 1.0,
+        USD: 1.04,
+        YEN: 161.25,
+      };
+  
+      // Widget initialisieren
+      const htmlKnoten = document.getElementById("umrechner");
+      const umrechnerWidget = WaehrungsumrechnerFactory(htmlKnoten, {
+        titel: "Mein Währungsumrechner",
+        wechselkurse: wechselkurse
+      });
+
+      htmlKnoten.addEventListener("umrechnungAbgeschlossen", (event) => {
+        // Warte darauf, dass die Ergebnisanzeige fertig ist
+        setTimeout(() => {
+            console.log("Eingabe-Betrag:", umrechnerWidget.getEingabeBetrag());
+            console.log("Umgerechneter Betrag:", umrechnerWidget.getUmgerechnetenBetrag());
+        }, 10); // Ein kleiner Delay, um sicherzugehen, dass das Ergebnisfeld aktualisiert ist
+        });
+
+    </script>
+  </body>
+</html>

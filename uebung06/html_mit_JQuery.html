@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Version</title>
+    <style>
+        div {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+
+    <!-- Einbindung der jQuery-Bibliothek -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+<body>
+    <h1>Test der jQuery-Funktion</h1>
+    <div id="parent">
+        <div>Child 1</div>
+        <div>Child 2</div>
+        <div>Child 3</div>
+        <div>Child 4</div>
+        <div>Child 5</div>
+    </div>
+
+    <script>
+        // Verwendung von jQuery, um das zweite Kind rot zu färben
+        $("#parent > div:nth-child(2)").css("color", "red");
+
+        // Verwendung von jQuery, um jedes zweite Kind gelb zu färben
+        $("#parent > div:nth-child(2n)").css("background-color", "yellow");
+    </script>
+</body>
+</html>

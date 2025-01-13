@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test childElement()</title>
+    <style>
+        div {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Testing childElement() Function</h1>
+    <div id="parent">
+        <div>Child 1</div>
+        <div>Child 2</div>
+        <div>Child 3</div>
+        <div>Child 4</div>
+        <div>Child 5</div>
+    </div>
+
+    <script>
+        // ----------Aufgabe 1--------
+        Node.prototype.childElement = function(selector) {
+            let children = Array.from(this.children);
+            if (typeof selector === 'number') {
+                return children[selector - 1] || null;
+            } else if (typeof selector === 'string' && selector.endsWith('.')) {
+            let n = parseInt(selector);
+            return children.filter((_, index) => (index + 1) % n === 0);
+            }   
+        return null;
+        };
+         // Test der Funktionalität
+         const parentElement = document.getElementById('parent');
+
+        // 2. Kind auswählen und färben
+        const secondChild = parentElement.childElement(2);
+        if (secondChild) {
+            secondChild.style.color = 'red';
+        }
+
+        // Jedes 2. Kind auswählen und Hintergrund ändern
+        const everySecondChild = parentElement.childElement('2.');
+        everySecondChild.forEach(child => {
+            child.style.backgroundColor = 'yellow';
+        });
+        
+
+
+        
+        // ----------Aufgabe 2--------
+        // Definition des Wrapper-Objekts
+        function Wrapper(elements) {
+            this.elements = Array.isArray(elements) ? elements : [elements];
+        }
+
+        // Methode zum Setzen von CSS-Eigenschaften
+        Wrapper.prototype.css = function(property, value) {
+            this.elements.forEach(element => {
+                if (element) {
+                    element.style[property] = value;
+                }
+            });
+        };
+
+    //     // Erweiterung des Node-Prototypes mit der Funktion childElement
+    //     Node.prototype.childElement = function(selector) {
+    //         const children = Array.from(this.children); // Erhalte alle Kind-Elemente als Array
+    //         if (typeof selector === 'number') {
+    //             // Einzelnes Kind-Element auswählen
+    //             return new Wrapper(children[selector - 1] || null);
+    //         } else if (typeof selector === 'string' && selector.endsWith('.')) {
+    //             // Jedes n-te Kind-Element auswählen
+    //             const n = parseInt(selector, 10);
+    //             return new Wrapper(children.filter((_, index) => (index + 1) % n === 0));
+    //         }
+    //         return new Wrapper(null);
+    //     };
+
+    //    // Test der Funktionalität
+    //    const parentElement = document.getElementById('parent');
+
+
+    //     // 2. Kind auswählen und färben
+    //     parentElement.childElement(2).css("color", "red");
+
+    //     // Jedes 2. Kind auswählen und Hintergrund ändern
+    //     parentElement.childElement("2.").css("backgroundColor", "yellow");
+
+        
+    </script>
+</body>
+</html>
